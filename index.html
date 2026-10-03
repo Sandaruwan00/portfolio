@@ -53,11 +53,13 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#achievements">Achievements</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="CV_Sandaruwan_Ekanayake.pdf" download>Download CV</a></li>
-  </ul>
+    <li><a href="CV_Sandaruwan_Ekanayake.pdf" target="_blank" download>Download CV</a></li>
+</ul>
 </nav>
 
 <!-- HERO -->
@@ -80,10 +82,11 @@
           View experience
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="CV_Sandaruwan_Ekanayake.pdf" class="btn-secondary" download>
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-          Download CV
-        </a>
+       
+<a href="javascript:void(0);" class="btn-secondary" onclick="openCVModal()">
+  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+  Preview CV
+</a>
       </div>
     </div>
     <div class="hero-image-wrapper fade-up">
@@ -91,6 +94,47 @@
     </div>
   </div>
 </section>
+
+<!-- CV PREVIEW MODAL -->
+<div id="cvModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeCVModal()">&times;</span>
+    <!-- Displays the PDF -->
+    <iframe src="CV_Sandaruwan_Ekanayake.pdf" title="CV Preview"></iframe>
+  </div>
+</div>
+
+<script>
+  // Open the CV Modal
+function openCVModal() {
+  const modal = document.getElementById('cvModal');
+  modal.style.display = 'flex'; // Show the container
+  
+  // A tiny delay ensures the CSS fade-in transition triggers correctly
+  setTimeout(() => {
+    modal.style.opacity = '1'; 
+  }, 10);
+}
+
+// Close the CV Modal
+function closeCVModal() {
+  const modal = document.getElementById('cvModal');
+  modal.style.opacity = '0'; // Fade out
+  
+  // Wait for the fade-out transition to finish before hiding completely
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 300);
+}
+
+// Close modal if user clicks on the dark background overlay
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('cvModal');
+  if (event.target === modal) {
+    closeCVModal();
+  }
+});
+</script>
 
 <!-- ABOUT -->
 <section id="about">
@@ -114,7 +158,7 @@
       <div class="fade-up">
         <ul class="info-list">
           <li><span class="info-label">Full name</span><span class="info-value">E.W.A.M.S.V. Ekanayake</span></li>
-          <li><span class="info-label">Date of Birth</span><span class="info-value">10th December 2000</span></li>
+          <li><span class="info-label">Date of Birth</span><span class="info-value">10th December 2000 (<span id="age"></span> years)</span></li>
           <li><span class="info-label">Address</span><span class="info-value">No. 393/3, Camellia Rise, <br> Mahakanda, Hindagala, <br> Kandy, Sri Lanka</span></li>
           <li><span class="info-label">Languages</span><span class="info-value">English (Fluent), <br> Sinhala (Native)</span></li>
           <li><span class="info-label">Email</span><span class="info-value"><a href="mailto:sandaruwanekanayake531@gmail.com">sandaruwanekanayake531@gmail.com</a></span></li>
@@ -123,6 +167,22 @@
           <li><span class="info-label">Github</span><span class="info-value"><a href="https://github.com/Sandaruwan00" target="_blank">Sandaruwan00</a></span></li>
         </ul>
       </div>
+
+      <script>
+        // Calculate age dynamically
+          const dob = new Date('2000-12-10');
+          const today = new Date();
+          let age = today.getFullYear() - dob.getFullYear();
+          const monthDiff = today.getMonth() - dob.getMonth();
+
+          // If the birthday hasn't happened yet this year, subtract 1
+          if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+            age--;
+          }
+
+          document.getElementById('age').textContent = age;
+      </script>
+      
     </div>
   </div>
 </section>
@@ -136,7 +196,7 @@
     </div>
     <div class="skills-grid">
       <div class="skill-card fade-up">
-        <div class="skill-card-title">Languages &amp; Frameworks</div>
+        <div class="skill-card-title">Technical Skills</div>
         <div class="skill-tags">
           <span class="skill-tag">Java</span>
           <span class="skill-tag">HTML</span>
@@ -145,6 +205,8 @@
           <span class="skill-tag">PHP</span>
           <span class="skill-tag">My SQL</span>
           <span class="skill-tag">OOP Concepts</span>
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">Git</span>
         </div>
       </div>
       
@@ -165,6 +227,73 @@
           <span class="skill-tag">Communication</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-header fade-up">
+      <span class="section-tag">Projects</span>
+      <h2>What I've built</h2>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card fade-up">
+
+        <div class="project-top">
+          <span class="project-type">Final-Year Project</span>
+
+          <a href="https://github.com/Sandaruwan00/Fabricapparel"
+             target="_blank"
+             class="project-link"
+             aria-label="View Fabric Apparel project on GitHub">
+            GitHub
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M7 17L17 7"/>
+              <path d="M7 7h10v10"/>
+            </svg>
+          </a>
+        </div>
+
+        <h3>Web Based Apparel Manufacturing Management System</h3>
+
+        <!-- NEW: Project Screenshots Gallery -->
+        <div class="project-gallery">
+          <!-- Replace 'screenshot1.jpg' with your actual image file names -->
+          <div class="img-wrapper">
+            <img src="images/dashboard_fabricapparel.png" alt="Apparel System Dashboard">
+          </div>
+          <div class="img-wrapper">
+            <img src="images/inventory_fabricapparel.png" alt="Apparel System Inventory">
+          </div>
+        </div>
+
+        <p class="project-description">
+          A web-based ERP system developed for an apparel manufacturing
+          company to manage and streamline key business operations.
+          The system covers areas such as orders, planning, stock,
+          purchasing, production, transportation, packing, warehouse
+          management and user management.
+        </p>
+
+        <div class="project-tech">
+          <span>PHP</span>
+          <span>MySQL</span>
+          <span>JavaScript</span>
+          <span>Bootstrap 5</span>
+          <span>MVC</span>
+          <span>OOP</span>
+          <span>AJAX</span>
+          <span>FPDF</span>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </section>
@@ -240,13 +369,13 @@
         <div class="edu-year">2017 — 2022</div>
         <div class="edu-degree">G.C.E. Advanced Level — Biological Science</div>
         <div class="edu-inst">Dharmaraja College, Kandy</div>
-        <div class="edu-detail">Index: 7390629 &nbsp;·&nbsp; Pass with 2C's, 1S</div>
+        <div class="edu-detail">Pass with 2C's, 1S</div>
       </div>
       <div class="edu-card fade-up">
         <div class="edu-year">2016</div>
         <div class="edu-degree">G.C.E. Ordinary Level</div>
         <div class="edu-inst">Dharmaraja College, Kandy</div>
-        <div class="edu-detail">Index: 62343041 &nbsp;·&nbsp; Pass with 8A's, 1B</div>
+        <div class="edu-detail">Pass with 8A's, 1B</div>
       </div>
     </div>
   </div>
@@ -267,6 +396,27 @@
       <div class="activity-chip fade-up">ICT Club, Dharmaraja College (2018–2019)</div>
       <div class="activity-chip fade-up">Photography Society, Dharmaraja College (2018–2019)</div>
       <div class="activity-chip fade-up">Chess Team, Dharmaraja College</div>
+    </div>
+  </div>
+</section>
+
+<!-- OTHER ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-wrap">
+    <div class="section-header fade-up">
+      <span class="section-tag">Achievements</span>
+      <h2>Other Achievements</h2>
+    </div>
+    <div class="edu-grid">
+      
+      <!-- Violin Exam Card -->
+      <div class="edu-card fade-up">
+        <div class="edu-year">2010</div>
+        <div class="edu-degree">Certificate of Violin Prathama</div>
+        <div class="edu-inst">Bhathkande Sangith Vidyapith Lucknow</div>
+        <div class="edu-detail">1st Division (85 Marks)</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -305,20 +455,63 @@
         <div style="margin-bottom: 1rem;">
           <span class="section-tag">References</span>
         </div>
-        <div class="ref-cards">
-          <div class="ref-card">
-            <div class="ref-name">Senali Siriwardahana</div>
-            <div class="ref-role">Lecturer</div>
-            <div class="ref-org">Esoft Metro Campus, Kandy · MA in IR (University of Peradeniya), BA General, HND in English</div>
-            <div class="ref-tel">077 965 9334</div>
-          </div>
-          <div class="ref-card">
-            <div class="ref-name">Prabath Kahaduwaarachchi</div>
-            <div class="ref-role">Manager – Purchasing &amp; Supply / Act. AGM</div>
-            <div class="ref-org">Selacine Media Solutions Pvt Ltd · Ministry of Mass Media</div>
-            <div class="ref-tel">077 299 7883</div>
-          </div>
-        </div>
+
+<div class="ref-cards">
+
+  <!-- Reference 1 -->
+  <div class="ref-card">
+    <div class="ref-name">Mr. Yehen Tennakoon</div>
+    <div class="ref-qualification">
+      BIT (UCSC), MSc in ITSI (Kingston, UK)
+    </div>
+
+    <div class="ref-role">Lead Software Engineer</div>
+    <div class="ref-org">
+      IFS R&amp;D Private Limited<br>
+      736, Dr. Danister De Silva Mawatha, Colombo 09
+    </div>
+
+    <div class="ref-contact">
+      <div>
+        Mobile:
+        <a href="tel:+94721196192">072 119 6192</a>
+      </div>
+      <div>
+        Email:
+        <a href="mailto:yehentennakoon@gmail.com">yehentennakoon@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Reference 2 -->
+  <div class="ref-card">
+    <div class="ref-name">Ms. Senali Siriwardahana</div>
+    <div class="ref-qualification">
+      MA in IR (University of Peradeniya), BA General, HND in English
+    </div>
+
+    <div class="ref-role">Lecturer</div>
+    <div class="ref-org">
+      Esoft Metro Campus, Kandy
+    </div>
+
+    <div class="ref-contact">
+      <div>
+        Mobile:
+        <a href="tel:+94779659334">077 965 9334</a>
+      </div>
+      <div>
+        Email:
+        <a href="mailto:Nadeeshikasenali1234@gmail.com">
+          Nadeeshikasenali1234@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
       </div>
     </div>
   </div>
